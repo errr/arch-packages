@@ -1,0 +1,14 @@
+diff --git a/src/ui/theme.c b/src/ui/theme.c
+index f73b428..917b5ef 100644
+--- a/src/ui/theme.c
++++ b/src/ui/theme.c
+@@ -72,7 +72,8 @@ meta_frame_layout_get_borders (const MetaFrameLayout *layout,
+   meta_frame_borders_clear (borders);
+ 
+   /* For a full-screen window, we don't have any borders, visible or not. */
+-  if (flags & META_FRAME_FULLSCREEN)
++  if (flags & (META_FRAME_FULLSCREEN | META_FRAME_MAXIMIZED |
++               META_FRAME_TILED_LEFT | META_FRAME_TILED_RIGHT)) 
+     return;
+ 
+   g_return_if_fail (layout != NULL);
