@@ -1,0 +1,80 @@
+diff --git a/config.def.h b/config.def.h
+index bb5596e..2d8bfdd 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -5,8 +5,8 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-static char font[] = "Liberation Mono:pixelsize=12:antialias=false:autohint=false";
+-static int borderpx = 2;
++static char font[] = "DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=true";
++static int borderpx = 4;
+ static char shell[] = "/bin/sh";
+ static char *utmp = NULL;
+ static char stty_args[] = "stty raw -echo -iexten echonl";
+@@ -62,29 +62,29 @@ static unsigned int tabspaces = 8;
+ /* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+ 	/* 8 normal colors */
+-	"black",
+-	"red3",
+-	"green3",
+-	"yellow3",
+-	"blue2",
+-	"magenta3",
+-	"cyan3",
+-	"gray90",
++	"#222222",
++	"#cc0000",
++	"#4e9a06",
++	"#edd400",
++	"#3465a4",
++	"#92659a",
++	"#07c7ca",
++	"#d3d7cf",
+ 
+ 	/* 8 bright colors */
+-	"gray50",
+-	"red",
+-	"green",
+-	"yellow",
+-	"#5c5cff",
+-	"magenta",
+-	"cyan",
+-	"white",
++	"#707070",
++	"#ef2929",
++	"#8ae234",
++	"#fce94f",
++	"#729fcf",
++	"#c19fbe",
++	"#63e9e9",
++	"#eeeeec",
+ 
+ 	[255] = 0,
+ 
+ 	/* more colors can be added after 255 to use with DefaultXX */
+-	"#cccccc",
++	"#888a85",
+ };
+ 
+ 
+@@ -113,7 +113,7 @@ static Mousekey mshortcuts[] = {
+ };
+ 
+ /* Internal keyboard shortcuts. */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ 
+ static Shortcut shortcuts[] = {
+ 	/* mask                 keysym          function        argument */
+@@ -127,7 +127,7 @@ static Shortcut shortcuts[] = {
+ 	{ MODKEY|ShiftMask,     XK_Insert,      clippaste,      {.i =  0} },
+ 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
+ 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
+-	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
++	{ MODKEY|ShiftMask,     XK_Num_Lock,    numlock,        {.i =  0} },
+ };
+ 
+ /*

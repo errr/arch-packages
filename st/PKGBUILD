@@ -1,0 +1,41 @@
+# Based on https://aur.archlinux.org/packages/st-git-zsh/ by Michele Sr <mikefender@cryptolab.net>
+
+pkgname=st
+pkgver=20150603.71fa10f
+pkgrel=1
+pkgdesc='Simple terminal implementation for X (as config)'
+url='http://st.suckless.org/'
+arch=('i686' 'x86_64' 'armv7h')
+license=('MIT')
+depends=('libxft' 'fontconfig' 'ttf-dejavu')
+makedepends=('ncurses' 'libxext' 'git')
+source=('git://git.suckless.org/st' config.patch)
+sha1sums=('SKIP'
+          '041f4a36cedf22562ede4a9b46e4da1ff5d7b28e')
+
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  git log -1 --format='%cd.%h' --date=short | tr -d -
+}
+
+prepare() {
+  cd "${srcdir}/${pkgname}"
+  sed -e 's/CPPFLAGS =/CPPFLAGS +=/g' \
+      -e 's/CFLAGS =/CFLAGS +=/g' \
+      -e 's/LDFLAGS =/LDFLAGS +=/g' \
+      -i config.mk
+  patch -p1 -i "${srcdir}/config.patch"
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+  make PREFIX=/usr DESTDIR="${pkgdir}" TERMINFO="${pkgdir}/usr/share/terminfo" install
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
+}
