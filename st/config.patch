@@ -1,12 +1,12 @@
 diff --git a/config.def.h b/config.def.h
-index 930e468..5afd26c 100644
+index b6adc5e..a374338 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,8 +5,8 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
--static char font[] = "Liberation Mono:pixelsize=12:antialias=false:autohint=false";
+-static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 -static int borderpx = 2;
 +static char font[] = "DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=true";
 +static int borderpx = 4;
@@ -60,7 +60,7 @@ index 930e468..5afd26c 100644
  };
  
  
-@@ -130,7 +130,7 @@ static Mousekey mshortcuts[] = {
+@@ -139,7 +139,7 @@ static Mousekey mshortcuts[] = {
  };
  
  /* Internal keyboard shortcuts. */
