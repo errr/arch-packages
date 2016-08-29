@@ -1,9 +1,9 @@
 # Based on https://aur.archlinux.org/packages/st-git-zsh/ by Michele Sr <mikefender@cryptolab.net>
 
 pkgname=st-git
-pkgver=20151121.375b287
+pkgver=20160811.6e79e83
 pkgrel=1
-pkgdesc='Simple terminal implementation for X (as config)'
+pkgdesc='Simple terminal implementation for X (as mod)'
 url='http://st.suckless.org/'
 arch=('i686' 'x86_64' 'armv7h')
 license=('MIT')
@@ -11,9 +11,10 @@ depends=('libxft' 'fontconfig' 'ttf-dejavu')
 makedepends=('ncurses' 'libxext' 'git')
 provides=('st')
 conflicts=('st')
-source=('git://git.suckless.org/st' config.patch)
+source=('git://git.suckless.org/st#tag=0.7' config.patch vertcenter.patch)
 sha1sums=('SKIP'
-          '8242d8fdc01e906b032da9a17e784fca86f13920')
+          'd85fc5fece47348370926a2a77d4e324211170de'
+          'dcde03cab595bdacc51011bcfc5d520611b9a03f')
 
 
 pkgver() {
