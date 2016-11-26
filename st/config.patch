@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index b41747f..d1a08f2 100644
+index b41747f..72cb459 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,8 +5,8 @@
@@ -8,20 +8,20 @@ index b41747f..d1a08f2 100644
   */
 -static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 -static int borderpx = 2;
-+static char font[] = "DejaVu Sans Mono:size=8.5:antialias=true:autohint=true";
-+static int borderpx = 4;
++static char font[] = "Fira Code:size=9:antialias=true:autohint=false";
++static int borderpx = 8;
  
  /*
   * What program is execed by st depends of these precedence rules:
-@@ -25,7 +25,7 @@ static char vtiden[] = "\033[?6c";
+@@ -24,7 +24,7 @@ static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
+ static char vtiden[] = "\033[?6c";
  
  /* Kerning / character bounding-box multipliers */
- static float cwscale = 1.0;
--static float chscale = 1.0;
-+static float chscale = 1.15;
+-static float cwscale = 1.0;
++static float cwscale = 0.85;
+ static float chscale = 1.0;
  
  /*
-  * word delimiter string
 @@ -85,29 +85,46 @@ static unsigned int tabspaces = 8;
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
@@ -42,14 +42,14 @@ index b41747f..d1a08f2 100644
 +	/* "magenta3", */
 +	/* "cyan3", */
 +	/* "gray90", */
-+	"#222222",
-+	"#cc0000",
-+	"#4e9a06",
-+	"#edd400",
-+	"#3465a4",
-+	"#92659a",
-+	"#07c7ca",
-+	"#d3d7cf",
++	"#212121",
++	"#d32f2f",
++	"#7cb342",
++	"#fdd835",
++	"#2196f3",
++	"#7e57c2",
++	"#039be5",
++	"#e0e0e0",
  
  	/* 8 bright colors */
 -	"gray50",
@@ -68,21 +68,21 @@ index b41747f..d1a08f2 100644
 +	/* "magenta", */
 +	/* "cyan", */
 +	/* "white", */
-+	"#707070",
-+	"#ef2929",
-+	"#8ae234",
-+	"#fce94f",
-+	"#729fcf",
-+	"#c19fbe",
-+	"#63e9e9",
-+	"#eeeeec",
++	"#9e9e9e",
++	"#ff5252",
++	"#b2ff59",
++	"#ffff00",
++	"#82b1ff",
++	"#b388ff",
++	"#40c4ff",
++	"#eeeeee",
  
  	[255] = 0,
  
  	/* more colors can be added after 255 to use with DefaultXX */
 -	"#cccccc",
 +	/* "#cccccc", */
-+	"#888a85",
++	"#757575",
  	"#555555",
  };
  

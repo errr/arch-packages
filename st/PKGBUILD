@@ -7,13 +7,17 @@ pkgdesc='Simple terminal implementation for X (as mod)'
 url='http://st.suckless.org/'
 arch=('i686' 'x86_64' 'armv7h')
 license=('MIT')
-depends=('libxft' 'fontconfig' 'ttf-dejavu')
+depends=('libxft' 'fontconfig' 'otf-fira-code')
 makedepends=('ncurses' 'libxext' 'git')
 provides=('st')
 conflicts=('st')
-source=('git://git.suckless.org/st#tag=0.7' config.patch vertcenter.patch)
+source=('git://git.suckless.org/st#tag=0.7'
+        config.patch
+        hidecursor.patch
+        vertcenter.patch)
 sha1sums=('SKIP'
-          'd85fc5fece47348370926a2a77d4e324211170de'
+          'aa94bb9c72c5950c77efdc23938a1d7a7f354002'
+          'd2e764c601549f44909edbc2d982d303781f95d8'
           'dcde03cab595bdacc51011bcfc5d520611b9a03f')
 
 
@@ -29,6 +33,8 @@ prepare() {
       -e 's/LDFLAGS =/LDFLAGS +=/g' \
       -i config.mk
   patch -p1 -i "${srcdir}/config.patch"
+  patch -p1 -i "${srcdir}/hidecursor.patch"
+  patch -p1 -i "${srcdir}/vertcenter.patch"
 }
 
 build() {
