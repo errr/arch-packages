@@ -1,6 +1,6 @@
 # Based on https://aur.archlinux.org/packages/st-git-zsh/ by Michele Sr <mikefender@cryptolab.net>
 
-pkgname=st-git
+pkgname=st-xxx
 pkgver=20160811.6e79e83
 pkgrel=1
 pkgdesc='Simple terminal implementation for X (as mod)'
