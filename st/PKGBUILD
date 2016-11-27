@@ -16,7 +16,7 @@ source=('git://git.suckless.org/st#tag=0.7'
         hidecursor.patch
         vertcenter.patch)
 sha1sums=('SKIP'
-          'aa94bb9c72c5950c77efdc23938a1d7a7f354002'
+          '361bcc71a07355cefa950e37ebc2daca66e08b76'
           'd2e764c601549f44909edbc2d982d303781f95d8'
           'dcde03cab595bdacc51011bcfc5d520611b9a03f')
 

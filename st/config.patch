@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index b41747f..72cb459 100644
+index b41747f..650fd89 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,8 +5,8 @@
@@ -8,20 +8,11 @@ index b41747f..72cb459 100644
   */
 -static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 -static int borderpx = 2;
-+static char font[] = "Fira Code:size=9:antialias=true:autohint=false";
++static char font[] = "Fira Mono:size=9:antialias=true:autohint=false";
 +static int borderpx = 8;
  
  /*
   * What program is execed by st depends of these precedence rules:
-@@ -24,7 +24,7 @@ static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
- static char vtiden[] = "\033[?6c";
- 
- /* Kerning / character bounding-box multipliers */
--static float cwscale = 1.0;
-+static float cwscale = 0.85;
- static float chscale = 1.0;
- 
- /*
 @@ -85,29 +85,46 @@ static unsigned int tabspaces = 8;
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
@@ -86,6 +77,15 @@ index b41747f..72cb459 100644
  	"#555555",
  };
  
+@@ -142,7 +159,7 @@ static unsigned int mousebg = 0;
+  * will reverse too. Another logic would only make the simple feature too
+  * complex.
+  */
+-static unsigned int defaultitalic = 11;
++static unsigned int defaultitalic = 7;
+ static unsigned int defaultunderline = 7;
+ 
+ /*
 @@ -156,7 +173,8 @@ static MouseShortcut mshortcuts[] = {
  };
  
