@@ -7,7 +7,7 @@ pkgdesc='Simple terminal implementation for X (as mod)'
 url='http://st.suckless.org/'
 arch=('i686' 'x86_64' 'armv7h')
 license=('MIT')
-depends=('libxft' 'fontconfig' 'otf-fira-code')
+depends=('libxft' 'fontconfig' 'otf-fira-mono')
 makedepends=('ncurses' 'libxext' 'git')
 provides=('st')
 conflicts=('st')
@@ -16,7 +16,7 @@ source=('git://git.suckless.org/st#tag=0.7'
         hidecursor.patch
         vertcenter.patch)
 sha1sums=('SKIP'
-          '361bcc71a07355cefa950e37ebc2daca66e08b76'
+          '890a7fb92164def0d43ce761d3977b1a9a123ce7'
           'd2e764c601549f44909edbc2d982d303781f95d8'
           'dcde03cab595bdacc51011bcfc5d520611b9a03f')
 
@@ -44,7 +44,9 @@ build() {
 
 package() {
   cd "${srcdir}/st"
-  make PREFIX=/usr DESTDIR="${pkgdir}" TERMINFO="${pkgdir}/usr/share/terminfo" install
+  ticdir="${pkgdir}/etc/terminfo"
+  mkdir -p "$ticdir"
+  make PREFIX=/usr DESTDIR="${pkgdir}" TERMINFO="$ticdir" install
   install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
   install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
 }
