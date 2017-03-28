@@ -1,10 +1,10 @@
-# $Id: PKGBUILD 280889 2016-11-16 15:01:51Z heftig $
+# $Id: PKGBUILD 289103 2017-02-17 19:00:25Z heftig $
 # Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Maintainer: Ionut Biru <ibiru@archlinux.org>
 # Contributor: Michael Kanis <mkanis_at_gmx_dot_de>
 
 pkgname=mutter-xxx
-pkgver=3.22.2+1+g5c46094
+pkgver=3.22.3
 pkgrel=1
 pkgdesc="A window manager for GNOME"
 url="https://git.gnome.org/browse/mutter"
@@ -18,25 +18,32 @@ groups=(gnome)
 provides=('mutter')
 conflicts=('mutter')
 options=(!emptydirs)
-_commit=5c46094d67f2e5cdafe6edcfd8c0d5894a2dafc6  # gnome-3-22
-source=("git://git.gnome.org/mutter#commit=$_commit"
-       titlebars.patch)
+_commit=afb4165262ac7b51229663fdf859aee2dcc4b4e8  # tags/3.22.3^0
+source=("git+https://git.gnome.org/browse/mutter#commit=$_commit"
+        startup-notification.patch
+        titlebars.patch)
+
 sha256sums=('SKIP'
-            '6b47dcde16a59332f8612da544adc5ce5fabd5c483468ea0a3bc796d7f117d93')
+            '5a35ca4794fc361219658d9fae24a3ca21a365f2cb1901702961ac869c759366'
+            '8da755572091864dbf7b4e9c27617df2995f9ebaacfa897264bf8fec7c9c470d')
 
 pkgver() {
-  cd $pkgname
+  cd mutter
   git describe --tags | sed 's/-/+/g'
 }
 
 prepare() {
-  cd $pkgname
-  patch -p1 -i $srcdir/titlebars.patch
+  cd mutter
+
+  # https://bugs.archlinux.org/task/51940
+  patch -Np1 -i ../startup-notification.patch
+  patch -Np1 -i ../titlebars.patch
+
   NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-  cd $pkgname
+  cd mutter
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
       --libexecdir=/usr/lib/$pkgname --disable-static \
@@ -51,6 +58,7 @@ build() {
 }
 
 package() {
-  cd $pkgname
+  cd mutter
   make DESTDIR="$pkgdir" install
 }
+ 
