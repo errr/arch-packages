@@ -1,7 +1,7 @@
 # Based on https://aur.archlinux.org/packages/st-git-zsh/ by Michele Sr <mikefender@cryptolab.net>
 
 pkgname=st-xxx
-pkgver=20160811.6e79e83
+pkgver=20170410.5a10aca
 pkgrel=1
 pkgdesc='Simple terminal implementation for X (as mod)'
 url='http://st.suckless.org/'
@@ -11,15 +11,12 @@ depends=('libxft' 'fontconfig' 'otf-fira-mono')
 makedepends=('ncurses' 'libxext' 'git')
 provides=('st')
 conflicts=('st')
-source=('git://git.suckless.org/st#tag=0.7'
+source=('git://git.suckless.org/st'
         config.patch
-        hidecursor.patch
-        vertcenter.patch)
+        hidecursor.patch)
 sha1sums=('SKIP'
-          '890a7fb92164def0d43ce761d3977b1a9a123ce7'
-          'd2e764c601549f44909edbc2d982d303781f95d8'
-          'dcde03cab595bdacc51011bcfc5d520611b9a03f')
-
+          '61dcfe53e599c79ed81d808ec0d5b71e6ac0dc5f'
+          'b85e06f6190a55c2754fd47a1ff3f3dfd74722f6')
 
 pkgver() {
   cd "${srcdir}/st"
@@ -34,7 +31,6 @@ prepare() {
       -i config.mk
   patch -p1 -i "${srcdir}/config.patch"
   patch -p1 -i "${srcdir}/hidecursor.patch"
-  patch -p1 -i "${srcdir}/vertcenter.patch"
 }
 
 build() {
