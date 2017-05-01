@@ -15,7 +15,7 @@ source=('git://git.suckless.org/st'
         config.patch
         hidecursor.patch)
 sha1sums=('SKIP'
-          '61dcfe53e599c79ed81d808ec0d5b71e6ac0dc5f'
+          'a1cbfa391780ae79bc467b0e64af363d4b958a48'
           'b85e06f6190a55c2754fd47a1ff3f3dfd74722f6')
 
 pkgver() {

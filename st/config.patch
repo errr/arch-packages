@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index 877afab..81bee2b 100644
+index 877afab..fdd9c33 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,7 +5,7 @@
@@ -11,7 +11,15 @@ index 877afab..81bee2b 100644
  int borderpx = 2;
  
  /*
-@@ -32,7 +32,7 @@ float chscale = 1.0;
+@@ -25,14 +25,14 @@ static char vtiden[] = "\033[?6c";
+ 
+ /* Kerning / character bounding-box multipliers */
+ float cwscale = 1.0;
+-float chscale = 1.0;
++float chscale = 1.05;
+ 
+ /*
+  * word delimiter string
   *
   * More advanced example: " `'\"()[]{}"
   */
