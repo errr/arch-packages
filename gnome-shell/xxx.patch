@@ -1,0 +1,46 @@
+diff --git a/js/ui/keyboard.js b/js/ui/keyboard.js
+index da36c36..5a478b4 100644
+--- a/js/ui/keyboard.js
++++ b/js/ui/keyboard.js
+@@ -305,8 +305,8 @@ var Keyboard = new Lang.Class({
+     },
+ 
+     _syncEnabled: function () {
+-        this._enableKeyboard = this._a11yApplicationsSettings.get_boolean(SHOW_KEYBOARD) ||
+-                               this._lastDeviceIsTouchscreen();
++        this._enableKeyboard = Main.actionMode != Shell.ActionMode.NORMAL;
++
+         if (!this._enableKeyboard && !this._keyboard)
+             return;
+ 
+diff --git a/js/ui/main.js b/js/ui/main.js
+index e981db9..8f1ef93 100644
+--- a/js/ui/main.js
++++ b/js/ui/main.js
+@@ -302,7 +302,7 @@ function reloadThemeResource() {
+     if (_themeResource)
+         _themeResource._unregister();
+ 
+-    _themeResource = Gio.Resource.load(global.datadir + '/gnome-shell-theme.gresource');
++    _themeResource = Gio.Resource.load(global.datadir + '/gnome-shell-theme-xxx.gresource');
+     _themeResource._register();
+ }
+ 
+diff --git a/js/ui/windowManager.js b/js/ui/windowManager.js
+index a59b3fd..cc3ba18 100644
+--- a/js/ui/windowManager.js
++++ b/js/ui/windowManager.js
+@@ -985,7 +985,12 @@ var WindowManager = new Lang.Class({
+         gesture.connect('activated', Lang.bind(this, this._switchApp));
+         global.stage.add_action(gesture);
+ 
+-        let mode = Shell.ActionMode.ALL & ~Shell.ActionMode.LOCK_SCREEN;
++        let mode = (Shell.ActionMode.LOCK_SCREEN |
++                    Shell.ActionMode.UNLOCK_SCREEN |
++                    Shell.ActionMode.LOGIN_SCREEN |
++                    Shell.ActionMode.OVERVIEW |
++                    Shell.ActionMode.SYSTEM_MODAL |
++                    Shell.ActionMode.POPUP);
+         gesture = new EdgeDragAction.EdgeDragAction(St.Side.BOTTOM, mode);
+         gesture.connect('activated', Lang.bind(this, function() {
+             Main.keyboard.show(Main.layoutManager.bottomIndex);

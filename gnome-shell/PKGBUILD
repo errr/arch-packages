@@ -23,13 +23,11 @@ _commit=a3736d3a3951af8d5f67c3d0a961e5df9be7825f  # gnome-3-26
 source=("git+https://git.gnome.org/browse/gnome-shell#commit=$_commit"
         "git+https://git.gnome.org/browse/libgnome-volume-control"
         "git+https://git.gnome.org/browse/gnome-shell-sass"
-        no-caribou-bottom-gesture.patch
-        no-caribou-on-touch.patch)
+        xxx.patch)
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
-            '5e525ac51140de36a3a9790f4876f416b531e73fa04420b821935b1398a92006'
-            'ea46969ff131d43a5a3ea6ee65e6e0bd80c88eddca2f260ae565b829eeba47d6')
+            'e90486c75a8301c819ef27a9856fccf66236360ce030e174fbbc924fe4429b40')
 
 pkgver() {
   cd gnome-shell
@@ -48,8 +46,7 @@ prepare() {
   git config --local submodule.data/theme/gnome-shell-sass.url "$srcdir/gnome-shell-sass"
   git submodule update
 
-  patch -Np1 -i ../no-caribou-bottom-gesture.patch
-  patch -Np1 -i ../no-caribou-on-touch.patch
+  patch -Np1 -i ../xxx.patch
 }
   
 build() {
