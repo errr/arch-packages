@@ -1,17 +1,31 @@
 diff --git a/js/ui/keyboard.js b/js/ui/keyboard.js
-index da36c36..5a478b4 100644
+index da36c36..c6cddef 100644
 --- a/js/ui/keyboard.js
 +++ b/js/ui/keyboard.js
-@@ -305,8 +305,8 @@ var Keyboard = new Lang.Class({
+@@ -305,20 +305,15 @@ var Keyboard = new Lang.Class({
      },
  
      _syncEnabled: function () {
 -        this._enableKeyboard = this._a11yApplicationsSettings.get_boolean(SHOW_KEYBOARD) ||
 -                               this._lastDeviceIsTouchscreen();
-+        this._enableKeyboard = Main.actionMode != Shell.ActionMode.NORMAL;
-+
-         if (!this._enableKeyboard && !this._keyboard)
-             return;
+-        if (!this._enableKeyboard && !this._keyboard)
+-            return;
++        var mode = (Shell.ActionMode.LOCK_SCREEN |
++                    Shell.ActionMode.UNLOCK_SCREEN |
++                    Shell.ActionMode.LOGIN_SCREEN);
+ 
+-        this._setCaretTrackerEnabled(this._enableKeyboard);
++        this._enableKeyboard = Main.actionMode & mode;
+ 
+         if (this._enableKeyboard) {
+             if (!this._keyboard)
+                 this._setupKeyboard();
+-            else
+-                Main.layoutManager.showKeyboard();
+-        } else {
+-            Main.layoutManager.hideKeyboard(true);
+         }
+     },
  
 diff --git a/js/ui/main.js b/js/ui/main.js
 index e981db9..8f1ef93 100644
@@ -27,20 +41,17 @@ index e981db9..8f1ef93 100644
  }
  
 diff --git a/js/ui/windowManager.js b/js/ui/windowManager.js
-index a59b3fd..cc3ba18 100644
+index a59b3fd..111ed1e 100644
 --- a/js/ui/windowManager.js
 +++ b/js/ui/windowManager.js
-@@ -985,7 +985,12 @@ var WindowManager = new Lang.Class({
+@@ -985,7 +985,9 @@ var WindowManager = new Lang.Class({
          gesture.connect('activated', Lang.bind(this, this._switchApp));
          global.stage.add_action(gesture);
  
 -        let mode = Shell.ActionMode.ALL & ~Shell.ActionMode.LOCK_SCREEN;
 +        let mode = (Shell.ActionMode.LOCK_SCREEN |
 +                    Shell.ActionMode.UNLOCK_SCREEN |
-+                    Shell.ActionMode.LOGIN_SCREEN |
-+                    Shell.ActionMode.OVERVIEW |
-+                    Shell.ActionMode.SYSTEM_MODAL |
-+                    Shell.ActionMode.POPUP);
++                    Shell.ActionMode.LOGIN_SCREEN);
          gesture = new EdgeDragAction.EdgeDragAction(St.Side.BOTTOM, mode);
          gesture.connect('activated', Lang.bind(this, function() {
              Main.keyboard.show(Main.layoutManager.bottomIndex);
