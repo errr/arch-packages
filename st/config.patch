@@ -1,36 +1,34 @@
-diff --git a/config.def.h b/config.def.h
-index 877afab..fdd9c33 100644
---- a/config.def.h
-+++ b/config.def.h
+--- a/config.def.h	2018-03-20 23:29:59.000000000 +0300
++++ b/config.def.h	2018-04-30 09:38:33.806767042 +0300
 @@ -5,7 +5,7 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
--char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-+char font[] = "Monospace:size=10:antialias=true:autohint=false";
- int borderpx = 2;
+-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++static char *font = "Monospace:size=10:antialias=true:autohint=false";
+ static int borderpx = 2;
  
  /*
-@@ -25,14 +25,14 @@ static char vtiden[] = "\033[?6c";
+@@ -25,14 +25,14 @@
  
  /* Kerning / character bounding-box multipliers */
- float cwscale = 1.0;
--float chscale = 1.0;
-+float chscale = 1.05;
+ static float cwscale = 1.0;
+-static float chscale = 1.0;
++static float chscale = 1.05;
  
  /*
   * word delimiter string
   *
   * More advanced example: " `'\"()[]{}"
   */
--static char worddelimiters[] = " ";
-+static char worddelimiters[] = " 	`'\"()[]{}";
+-char *worddelimiters = " ";
++char *worddelimiters = " `'\"()[]{}";
  
  /* selection timeouts (in milliseconds) */
- unsigned int doubleclicktimeout = 300;
-@@ -85,30 +85,48 @@ static unsigned int tabspaces = 8;
+ static unsigned int doubleclicktimeout = 300;
+@@ -85,30 +85,30 @@
  /* Terminal colors (16 first used in escape sequence) */
- const char *colorname[] = {
+ static const char *colorname[] = {
  	/* 8 normal colors */
 -	"black",
 -	"red3",
@@ -40,14 +38,6 @@ index 877afab..fdd9c33 100644
 -	"magenta3",
 -	"cyan3",
 -	"gray90",
-+	/* "black", */
-+	/* "red3", */
-+	/* "green3", */
-+	/* "yellow3", */
-+	/* "blue2", */
-+	/* "magenta3", */
-+	/* "cyan3", */
-+	/* "gray90", */
 +	"#212121",
 +	"#d32f2f",
 +	"#43a047",
@@ -66,14 +56,6 @@ index 877afab..fdd9c33 100644
 -	"magenta",
 -	"cyan",
 -	"white",
-+	/* "gray50", */
-+	/* "red", */
-+	/* "green", */
-+	/* "yellow", */
-+	/* "#5c5cff", */
-+	/* "magenta", */
-+	/* "cyan", */
-+	/* "white", */
 +	"#9e9e9e",
 +	"#ff5252",
 +	"#66bb6a",
@@ -88,8 +70,6 @@ index 877afab..fdd9c33 100644
  	/* more colors can be added after 255 to use with DefaultXX */
 -	"#cccccc",
 -	"#555555",
-+	/* "#cccccc", */
-+	/* "#555555", */
 +	"#ff9800",
 +	"#009688",
  };
