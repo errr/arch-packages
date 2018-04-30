@@ -25,7 +25,7 @@ source=("git+https://gitlab.gnome.org/GNOME/gnome-shell.git#commit=$_commit"
         xxx.patch)
 sha256sums=('SKIP'
             'SKIP'
-            '4b44011f1998d64e65bddb8b4e448c447f7fe44630026d4b14b738522263e3bc')
+            '4a23db8d115c95eb845e5893b930cd06f1adf1ec51a01fbd1163fbb71baf19e3')
 
 pkgver() {
   cd gnome-shell

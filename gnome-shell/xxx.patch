@@ -21,16 +21,3 @@ index e13c7b724..7995bec8f 100644
      },
  
      _destroyKeyboard() {
-diff --git a/js/ui/main.js b/js/ui/main.js
-index 2cfe941be..2b1152a26 100644
---- a/js/ui/main.js
-+++ b/js/ui/main.js
-@@ -314,7 +314,7 @@ function reloadThemeResource() {
-     if (_themeResource)
-         _themeResource._unregister();
- 
--    _themeResource = Gio.Resource.load(global.datadir + '/gnome-shell-theme.gresource');
-+    _themeResource = Gio.Resource.load(global.datadir + '/gnome-shell-theme-xxx.gresource');
-     _themeResource._register();
- }
- 
