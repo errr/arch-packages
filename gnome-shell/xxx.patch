@@ -1,37 +1,31 @@
 diff --git a/js/ui/keyboard.js b/js/ui/keyboard.js
-index da36c36..c6cddef 100644
+index e13c7b724..7995bec8f 100644
 --- a/js/ui/keyboard.js
 +++ b/js/ui/keyboard.js
-@@ -305,20 +305,15 @@ var Keyboard = new Lang.Class({
-     },
+@@ -646,7 +646,7 @@ var Keyboard = new Lang.Class({
+     _syncEnabled() {
+         let wasEnabled = this._enabled;
+         this._enableKeyboard = this._a11yApplicationsSettings.get_boolean(SHOW_KEYBOARD);
+-        this._enabled = this._enableKeyboard || this._lastDeviceIsTouchscreen();
++        this._enabled = this._enableKeyboard;
+         if (!this._enabled && !this._keyboardController)
+             return;
  
-     _syncEnabled: function () {
--        this._enableKeyboard = this._a11yApplicationsSettings.get_boolean(SHOW_KEYBOARD) ||
--                               this._lastDeviceIsTouchscreen();
--        if (!this._enableKeyboard && !this._keyboard)
--            return;
-+        var mode = (Shell.ActionMode.LOCK_SCREEN |
-+                    Shell.ActionMode.UNLOCK_SCREEN |
-+                    Shell.ActionMode.LOGIN_SCREEN);
+@@ -657,8 +657,7 @@ var Keyboard = new Lang.Class({
+         else if (!this._enabled)
+             this.setCursorLocation(null);
  
--        this._setCaretTrackerEnabled(this._enableKeyboard);
-+        this._enableKeyboard = Main.actionMode & mode;
- 
-         if (this._enableKeyboard) {
-             if (!this._keyboard)
-                 this._setupKeyboard();
--            else
--                Main.layoutManager.showKeyboard();
--        } else {
+-        if (!this._enabled && wasEnabled)
 -            Main.layoutManager.hideKeyboard(true);
-         }
++        Main.layoutManager.hideKeyboard(true);
      },
  
+     _destroyKeyboard() {
 diff --git a/js/ui/main.js b/js/ui/main.js
-index e981db9..8f1ef93 100644
+index 2cfe941be..2b1152a26 100644
 --- a/js/ui/main.js
 +++ b/js/ui/main.js
-@@ -302,7 +302,7 @@ function reloadThemeResource() {
+@@ -314,7 +314,7 @@ function reloadThemeResource() {
      if (_themeResource)
          _themeResource._unregister();
  
@@ -40,18 +34,3 @@ index e981db9..8f1ef93 100644
      _themeResource._register();
  }
  
-diff --git a/js/ui/windowManager.js b/js/ui/windowManager.js
-index a59b3fd..111ed1e 100644
---- a/js/ui/windowManager.js
-+++ b/js/ui/windowManager.js
-@@ -985,7 +985,9 @@ var WindowManager = new Lang.Class({
-         gesture.connect('activated', Lang.bind(this, this._switchApp));
-         global.stage.add_action(gesture);
- 
--        let mode = Shell.ActionMode.ALL & ~Shell.ActionMode.LOCK_SCREEN;
-+        let mode = (Shell.ActionMode.LOCK_SCREEN |
-+                    Shell.ActionMode.UNLOCK_SCREEN |
-+                    Shell.ActionMode.LOGIN_SCREEN);
-         gesture = new EdgeDragAction.EdgeDragAction(St.Side.BOTTOM, mode);
-         gesture.connect('activated', Lang.bind(this, function() {
-             Main.keyboard.show(Main.layoutManager.bottomIndex);

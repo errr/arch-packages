@@ -3,31 +3,29 @@
 # Contributor: Flamelab <panosfilip@gmail.com
 
 pkgname=gnome-shell-xxx
-pkgver=3.26.2+9+ga3736d3a3
+pkgver=3.28.1
 pkgrel=1
 pkgdesc="The next generation GNOME Shell"
 url="https://wiki.gnome.org/Projects/GnomeShell"
 arch=(x86_64)
 license=(GPL2)
-depends=(accountsservice caribou gcr gjs gnome-bluetooth gnome-menus upower
-         gnome-session gnome-settings-daemon gnome-themes-standard gsettings-desktop-schemas
-         libcanberra-pulse libcroco libgdm libsecret mutter nm-connection-editor
-         unzip gstreamer)
-makedepends=(gtk-doc gnome-control-center evolution-data-server gobject-introspection git meson)
+depends=(accountsservice gcr gjs gnome-bluetooth upower gnome-session gnome-settings-daemon
+         gnome-themes-extra gsettings-desktop-schemas libcanberra-pulse libcroco libgdm libsecret
+         mutter nm-connection-editor unzip gstreamer libibus)
+makedepends=(gtk-doc gnome-control-center evolution-data-server gobject-introspection git meson
+             sassc)
 optdepends=('gnome-control-center: System settings'
             'evolution-data-server: Evolution calendar integration')
 groups=(gnome)
 provides=('gnome-shell')
 conflicts=('gnome-shell')
-_commit=a3736d3a3951af8d5f67c3d0a961e5df9be7825f  # gnome-3-26
-source=("git+https://git.gnome.org/browse/gnome-shell#commit=$_commit"
+_commit=5b10d157fe5b60a11e87737c1050f161b2f986a6  # tags/3.28.1^0
+source=("git+https://gitlab.gnome.org/GNOME/gnome-shell.git#commit=$_commit"
         "git+https://git.gnome.org/browse/libgnome-volume-control"
-        "git+https://git.gnome.org/browse/gnome-shell-sass"
         xxx.patch)
 sha256sums=('SKIP'
             'SKIP'
-            'SKIP'
-            '51746f6aa53448a16a23ed7c45c16ed510d4134cde9479640263b831ddf33709')
+            '4b44011f1998d64e65bddb8b4e448c447f7fe44630026d4b14b738522263e3bc')
 
 pkgver() {
   cd gnome-shell
@@ -35,29 +33,25 @@ pkgver() {
 }
 
 prepare() {
-  mkdir build
   cd gnome-shell
 
   # Move the plugin to our custom epiphany-only dir
   sed -i "s/'mozilla'/'epiphany'/g" meson.build
 
   git submodule init
-  git config --local submodule.src/gvc.url "$srcdir/libgnome-volume-control"
-  git config --local submodule.data/theme/gnome-shell-sass.url "$srcdir/gnome-shell-sass"
+  git config --local submodule.subprojects/gvc.url "$srcdir/libgnome-volume-control"
   git submodule update
 
   patch -Np1 -i ../xxx.patch
 }
   
 build() {
-  cd build
-  arch-meson ../gnome-shell -Denable-documentation=true
-  ninja
+  arch-meson gnome-shell build -D gtk_doc=true
+  ninja -C build
 }
 
 package() {
-  cd build
-  DESTDIR="$pkgdir" ninja install
+  DESTDIR="$pkgdir" ninja -C build install
 
   # Must exist; FS#37412
   mkdir "$pkgdir/usr/share/gnome-shell/modes"
