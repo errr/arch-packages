@@ -1,19 +1,21 @@
---- a/config.def.h	2018-03-20 23:29:59.000000000 +0300
-+++ b/config.def.h	2018-04-30 09:38:33.806767042 +0300
+--- a/config.def.h	2018-05-11 17:39:24.101289171 +0300
++++ b/config.def.h	2018-05-11 18:27:59.649939988 +0300
 @@ -5,7 +5,7 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-+static char *font = "Monospace:size=10:antialias=true:autohint=false";
++static char *font = "Fira Code:size=9:antialias=true:autohint=false:color=false";
  static int borderpx = 2;
  
  /*
-@@ -25,14 +25,14 @@
+@@ -24,15 +24,15 @@
+ char *vtiden = "\033[?6c";
  
  /* Kerning / character bounding-box multipliers */
- static float cwscale = 1.0;
+-static float cwscale = 1.0;
 -static float chscale = 1.0;
++static float cwscale = 0.85;
 +static float chscale = 1.05;
  
  /*

@@ -5,7 +5,7 @@ pkgdesc='Simple terminal implementation for X.'
 url='http://st.suckless.org/'
 arch=('i686' 'x86_64')
 license=('MIT')
-depends=('libxft' 'libxext')
+depends=('libxft' 'libxext' 'otf-fira-code')
 makedepends=('ncurses')
 provides=('st')
 conflicts=('st')
@@ -13,7 +13,7 @@ source=(https://dl.suckless.org/st/st-$pkgver.tar.gz
         config.patch
         hidecursor.patch)
 sha256sums=('c4fb0fe2b8d2d3bd5e72763e80a8ae05b7d44dbac8f8e3bb18ef0161c7266926'
-            'fe36fd852d4b570739e50ab3e8a351903152f976266cd9336bb72076d8dbe931'
+            'd57af1378b75b25661f9fe57e55537bc033a84eff879258d933d3f293706e5c5'
             'b330af3d9934587549636bc8db4b5d6d9d8eed0e323afd29283dcdec38a3dfc1')
 
 prepare() {
